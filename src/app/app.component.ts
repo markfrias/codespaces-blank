@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskList = this.localTaskService.getTasksFromStorage();
+    
   }
 
 
@@ -20,7 +21,12 @@ export class AppComponent implements OnInit {
   taskList = [
     new Task('Eat dinner', false, (Math.trunc(Math.random() * 100)))
   ];
+
   addNewTask(newTask: Task): void {
     this.taskList.push(newTask);
+  }
+
+  removeTask(id: number) {
+    this.taskList = this.taskList.filter((task,idx) => task.id !== id)
   }
 }

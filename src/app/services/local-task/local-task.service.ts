@@ -17,25 +17,42 @@ export class LocalTaskService {
 
     // Add item to array
     let tasksArray = this.getTasksFromStorage();
-    //console.log(tasksArray)
     tasksArray.push(task);
 
     // Save to localStorage
     this.localStorage.setItem('tasks', JSON.stringify(tasksArray));
-    //console.log(this.localStorage.getItem('tasks'))
   }
 
   getTasksFromStorage() {
     let storedTasks = this.localStorage.getItem('tasks');
     if (storedTasks) {
       let convertedTasks = JSON.parse(storedTasks);
-      //console.log(convertedTasks)
       return convertedTasks;
+      
     } else {
       const array = JSON.stringify([])
       return JSON.parse(array);
     }
     
+    
+  }
+
+  removeTaskFromStorage(id: number) {
+    let tasksArray: [] = this.getTasksFromStorage();
+    let deletedTask = tasksArray.findIndex(task => this.findById(id, task))
+    tasksArray.splice(deletedTask, 1);
+    this.localStorage.setItem('tasks', JSON.stringify(tasksArray));
+
+    
+    
+
+  }
+
+  findById(number: number, task: Task) {
+    if (number === task.id) {
+      return true;
+    }
+    return false
   }
 
 

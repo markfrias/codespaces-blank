@@ -3,8 +3,6 @@
     <div class="app-content">
         <app-input-header class="input-header" (newTaskEvent)="addNewTask($event)"></app-input-header>
     </div>
-    <app-task-list [taskList]="taskList"></app-task-list>
+    <app-task-list [taskList]="taskList" (removedTaskEvent)="removeTask($event)"></app-task-list>
    
 </div>
-
-{{taskList | json}}
